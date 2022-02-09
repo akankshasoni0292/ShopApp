@@ -15,18 +15,19 @@ const CustomButton = props => {
 
 const styles = StyleSheet.create({
   text: {
-    color: 'white',
+    color: Color.accent,
     fontFamily: Font.bold,
     fontSize: 15,
   },
   button: {
-    backgroundColor: Color.accent,
-    borderRadius: 20,
-    paddingHorizontal: 15,
+    borderColor: Color.accent,
+    borderWidth: 2,
+    borderRadius: 5,
+    paddingHorizontal: 6,
     marginVertical: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 30,
+    height: 33,
   },
 });
 

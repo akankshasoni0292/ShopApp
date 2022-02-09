@@ -1,7 +1,9 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProductOverview from '../screens/shop/ProductsOverview';
+import ProductDetails from '../screens/shop/ProductDetails';
 import Color from '../constants/Color';
+import CartOverview from '../screens/shop/CartOverview';
 
 const ProductNavigationStack = createNativeStackNavigator();
 
@@ -24,6 +26,11 @@ const ProductNavigator = props => {
         name="Products"
         component={ProductOverview}
       />
+      <ProductNavigationStack.Screen
+        name="Details"
+        component={ProductDetails}
+      />
+      <ProductNavigationStack.Screen name="Cart" component={CartOverview} />
     </ProductNavigationStack.Navigator>
   );
 };

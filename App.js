@@ -3,25 +3,28 @@ import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux';
-import ProductNavigator from './navigation/ProductNavigator';
+import ShopNavigator from './navigation/ShopNavigator';
 import {productReducer} from './store/reducers/ProductReducer';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {enableScreens} from 'react-native-screens';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {addOrRemoveCartReducer} from './store/reducers/CartReducer';
 
 enableScreens();
 
 const rootReducer = combineReducers({
   products: productReducer,
+  cart: addOrRemoveCartReducer,
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 const App = () => {
   return (
     <Provider store={store}>
       <SafeAreaProvider>
         <NavigationContainer>
-          <ProductNavigator />
+          <ShopNavigator />
         </NavigationContainer>
       </SafeAreaProvider>
     </Provider>

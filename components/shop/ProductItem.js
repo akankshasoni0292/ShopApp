@@ -1,38 +1,42 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import Color from '../../constants/Color';
 import Font from '../../constants/Font';
 import CustomButton from './CustomButton';
 
 const ProductItem = props => {
   return (
-    <View style={styles.container}>
-      <View style={styles.itemContainer}>
-        <Image
-          style={styles.image}
-          source={{uri: props.imageUrl}}
-          resizeMode="stretch"
-        />
-        <View style={styles.actionContainer}>
-          <View style={styles.detailContainer}>
-            <Text style={styles.details} numberOfLines={0}>
-              {props.title}
-            </Text>
-            <Text style={styles.details}>${props.price} </Text>
+    <TouchableOpacity onPress={props.viewDetail}>
+      <View style={styles.container}>
+        <View style={styles.itemContainer}>
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.image}
+              source={{uri: props.imageUrl}}
+              resizeMode="stretch"
+            />
           </View>
-          <View style={styles.buttonContainer}>
-            <CustomButton title="Details" onPress={props.viewDetails} />
-            <CustomButton title="Add to Cart" onPress={props.addToCart} />
+
+          <View style={styles.actionContainer}>
+            <View style={styles.detailContainer}>
+              <Text style={styles.details} numberOfLines={0}>
+                {props.title}
+              </Text>
+              <Text style={styles.details}>${props.price} </Text>
+            </View>
+            <View style={styles.buttonContainer}>
+              <CustomButton title="Add to Cart" onPress={props.addToCart} />
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: '90%',
     height: 200,
     shadowColor: 'black',
     shadowOpacity: 0.3,
@@ -40,7 +44,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 2, height: 3},
     elevation: 5,
     margin: 10,
-    backgroundColor: Color.view,
+    backgroundColor: 'white',
     borderRadius: 10,
   },
   itemContainer: {
@@ -50,18 +54,23 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     flexDirection: 'row',
   },
+  imageContainer: {
+    width: '50%',
+    height: '100%',
+  },
   actionContainer: {
-    width: '40%',
+    width: '50%',
     height: '100%',
     padding: 5,
   },
   image: {
-    width: '50%',
+    width: '100%',
     height: '100%',
   },
   detailContainer: {
     alignItems: 'center',
-    height: '55%',
+    height: '75%',
+    padding: 5,
   },
   details: {
     fontFamily: Font.bold,
