@@ -8,6 +8,7 @@ import * as cartActions from '../../store/actions/CartAction';
 
 const ProductOverview = props => {
   const products = useSelector(state => state.products.availableProducts);
+  console.log('products', products);
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {

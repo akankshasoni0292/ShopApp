@@ -1,6 +1,6 @@
-import {abs} from 'react-native-reanimated';
 import Cart from '../../models/Cart';
 import {ADD_TO_CART, REMOVE_FROM_CART} from '../actions/CartAction';
+import {ADD_ORDER} from '../actions/OrderAction';
 
 const initialState = {
   cartItems: {},
@@ -57,6 +57,9 @@ export const addOrRemoveCartReducer = (state = initialState, actions) => {
         cartItems: updatedCartItems,
         totalAmount: state.totalAmount - selectedCartItem.productPrice,
       };
+
+    case ADD_ORDER:
+      return initialState;
   }
   return state;
 };

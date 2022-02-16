@@ -9,12 +9,14 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {enableScreens} from 'react-native-screens';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {addOrRemoveCartReducer} from './store/reducers/CartReducer';
+import {orderReducer} from './store/reducers/OrderReducer';
 
 enableScreens();
 
 const rootReducer = combineReducers({
   products: productReducer,
   cart: addOrRemoveCartReducer,
+  order: orderReducer,
 });
 
 const store = createStore(rootReducer, composeWithDevTools());

@@ -13,11 +13,11 @@ const OrderNavigator = () => {
           backgroundColor: Color.primary,
         },
         headerTintColor: 'white',
-        headerLargeTitle: true,
-        headerLargeStyle: {
-          backgroundColor: Color.primary,
-        },
-        headerLargeTitleShadowVisible: true,
+        // headerLargeTitle: true,
+        // headerLargeStyle: {
+        //   backgroundColor: Color.primary,
+        // },
+        // headerLargeTitleShadowVisible: true,
         headerShadowVisible: true,
       }}>
       <OrderNavigationStack.Screen name="Order" component={Orders} />

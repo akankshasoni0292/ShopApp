@@ -15,11 +15,12 @@ const ProductNavigator = props => {
           backgroundColor: Color.primary,
         },
         headerTintColor: 'white',
-        headerLargeTitle: true,
-        headerLargeStyle: {
-          backgroundColor: Color.primary,
-        },
-        headerLargeTitleShadowVisible: true,
+        //Resolve the issue!
+        // headerLargeTitle: true,
+        // headerLargeStyle: {
+        //   backgroundColor: Color.primary,
+        // },
+        // headerLargeTitleShadowVisible: true,
         headerShadowVisible: true,
       }}>
       <ProductNavigationStack.Screen
