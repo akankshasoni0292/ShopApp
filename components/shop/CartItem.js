@@ -12,22 +12,24 @@ const CartItem = props => {
   return (
     <View style={styles.container}>
       <View style={styles.productContainer}>
-        <HeaderText>{props.product.productTitle}</HeaderText>
+        <HeaderText numberOfLines={2}>{props.product.productTitle}</HeaderText>
         <SubText>${props.product.productPrice.toFixed(2)}</SubText>
       </View>
       <View style={styles.quantityContainer}>
         <SubText>{props.product.quantity}</SubText>
       </View>
       <View style={styles.deleteContainer}>
-        <Icon.Button
-          name="trash-alt"
-          backgroundColor="transparent"
-          underlayColor={Color.view}
-          color="red"
-          onPress={() => {
-            dispatch(cartActions.removeFromCartAction(props.product.id));
-          }}
-        />
+        {props.deletable && (
+          <Icon.Button
+            name="trash-alt"
+            backgroundColor="transparent"
+            underlayColor={Color.view}
+            color="red"
+            onPress={() => {
+              dispatch(cartActions.removeFromCartAction(props.product.id));
+            }}
+          />
+        )}
       </View>
     </View>
   );
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     width: '100%',
-    height: 100,
+    height: 85,
     shadowColor: 'black',
     shadowOffset: {width: 0, height: 0},
     shadowOpacity: 0.3,

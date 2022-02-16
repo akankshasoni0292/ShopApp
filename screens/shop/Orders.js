@@ -1,5 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {StyleSheet, View, FlatList, Text} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {useSelector} from 'react-redux';
 import OrderItem from '../../components/shop/OrderItem';
@@ -31,7 +31,8 @@ const Orders = props => {
           <OrderItem
             orderId={itemData.item.id}
             amount={itemData.item.totalAmount}
-            orderDate={itemData.item.id}
+            orderDate={itemData.item.orderDate}
+            items={itemData.item.items}
           />
         )}
       />
@@ -42,12 +43,13 @@ const Orders = props => {
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   list: {
+    width: '100%',
     flexGrow: 1,
     alignItems: 'center',
+    padding: 10,
   },
 });
 

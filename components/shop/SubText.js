@@ -3,7 +3,11 @@ import {StyleSheet, Text} from 'react-native';
 import Font from '../../constants/Font';
 
 const SubText = props => {
-  return <Text style={{...props.style, ...styles.text}}>{props.children}</Text>;
+  return (
+    <Text {...props} style={{...styles.text, ...props.style}}>
+      {props.children}
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({

@@ -1,42 +1,51 @@
-import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import CartItem from './CartItem';
 import HeaderText from './HeaderText';
 import SubText from './SubText';
 
 const OrderItem = props => {
+  const [showDetails, setShowDetails] = useState(false);
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <View>
+      <View>
+        <View style={styles.detail}>
           <HeaderText>{props.orderId}</HeaderText>
+          <SubText>${props.amount}</SubText>
         </View>
         <View style={styles.detail}>
-          <SubText>{props.amount}</SubText>
-          <SubText>{props.orderDate}</SubText>
-          <Icon.Button
-            name="info-circle"
-            size={25}
-            color="gray"
-            backgroundColor="transparent"
-          />
+          <View style={styles.order}>
+            <SubText style={styles.date}>{props.orderDate}</SubText>
+          </View>
+          <View style={styles.info}>
+            <Icon.Button
+              name="info-circle"
+              size={23}
+              color="gray"
+              backgroundColor="transparent"
+              underlayColor="transparent"
+              onPress={() => setShowDetails(prevState => !prevState)}
+            />
+          </View>
         </View>
       </View>
+      {showDetails && (
+        <View style={styles.cart}>
+          {props.items.map(item => (
+            <CartItem key={item.productId} product={item} />
+          ))}
+        </View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
-    width: '100%',
-    margin: 10,
-  },
-  card: {
-    width: '90%',
-    maxWidth: '90%',
-    height: 80,
+    width: '95%',
+    maxWidth: '95%',
     shadowColor: 'black',
     shadowOffset: {width: 0, height: 0},
     shadowOpacity: 0.3,
@@ -46,12 +55,29 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     marginTop: 20,
-    padding: 15,
+    padding: 20,
   },
   detail: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '90%',
+    alignItems: 'center',
+  },
+  order: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '85%',
+    alignItems: 'center',
+  },
+  info: {
+    width: '20%',
+    alignItems: 'flex-end',
+  },
+  date: {
+    color: 'gray',
+    fontSize: 17,
+  },
+  cart: {
+    width: '100%',
   },
 });
 

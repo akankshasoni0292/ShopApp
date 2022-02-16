@@ -33,7 +33,9 @@ const CartList = props => {
             <CustomButton
               title="Order Now"
               onPress={() => {
-                dispatch(orderActions.addOrderAction(carts, totalAmount));
+                dispatch(
+                  orderActions.addOrderAction(cartItemsArray, totalAmount),
+                );
               }}
             />
           </View>
@@ -42,7 +44,9 @@ const CartList = props => {
           <FlatList
             contentContainerStyle={styles.list}
             data={cartItemsArray}
-            renderItem={itemData => <CartItem product={itemData.item} />}
+            renderItem={itemData => (
+              <CartItem product={itemData.item} deletable />
+            )}
           />
         </View>
       </View>
