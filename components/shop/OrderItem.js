@@ -20,7 +20,7 @@ const OrderItem = props => {
           </View>
           <View style={styles.info}>
             <Icon.Button
-              name="info-circle"
+              name={showDetails ? 'angle-up' : 'angle-down'}
               size={23}
               color="gray"
               backgroundColor="transparent"
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   info: {
     width: '20%',
-    alignItems: 'flex-end',
+    alignItems: 'center',
   },
   date: {
     color: 'gray',
