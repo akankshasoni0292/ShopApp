@@ -20,7 +20,7 @@ const OrderItem = props => {
           </View>
           <View style={styles.info}>
             <Icon.Button
-              name={showDetails ? 'angle-up' : 'angle-down'}
+              name={showDetails ? 'angle-down' : 'angle-up'}
               size={23}
               color="gray"
               backgroundColor="transparent"
