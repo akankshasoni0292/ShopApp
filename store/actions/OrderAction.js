@@ -1,6 +1,8 @@
 import moment from 'moment';
+import Order from '../../models/Order';
 
 export const ADD_ORDER = 'ADD_ORDER';
+export const FETCH_ORDERS = 'FECTH_ORDERS';
 
 export const addOrderAction = (cartItems, totalAmount) => {
   const date = new moment();
@@ -29,6 +31,34 @@ export const addOrderAction = (cartItems, totalAmount) => {
           amount: totalAmount,
           orderDate: date,
         },
+      });
+    });
+  };
+};
+
+export const fetchOrderAction = () => {
+  return async dispatch => {
+    const response = await fetch(
+      'https://shopapp-rn-9290d-default-rtdb.firebaseio.com/orders/u1.json',
+    );
+
+    response.json().then(data => {
+      const loadedOrders = [];
+
+      for (const key in data) {
+        loadedOrders.push(
+          new Order(
+            key.slice(1),
+            data[key].cartItems,
+            data[key].totalAmount,
+            new moment(data[key].date).format('MMM Do YYYY, h:mm a'),
+          ),
+        );
+      }
+
+      dispatch({
+        type: FETCH_ORDERS,
+        fetchedOrders: loadedOrders,
       });
     });
   };

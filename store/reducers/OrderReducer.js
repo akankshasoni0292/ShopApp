@@ -1,7 +1,7 @@
 //import moment from 'moment';
 //import {v4 as uuidv4} from 'uuid';
 import Order from '../../models/Order';
-import {ADD_ORDER} from '../actions/OrderAction';
+import {ADD_ORDER, FETCH_ORDERS} from '../actions/OrderAction';
 
 const initialState = {
   orders: [],
@@ -19,6 +19,8 @@ export const orderReducer = (state = initialState, actions) => {
       );
       console.log('New Order:', newOrder);
       return {...state, orders: state.orders.concat(newOrder)};
+    case FETCH_ORDERS:
+      return {orders: actions.fetchedOrders};
     default:
       return state;
   }

@@ -1,12 +1,19 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import OrderItem from '../../components/shop/OrderItem';
 import Color from '../../constants/Color';
+import * as orderActions from '../../store/actions/OrderAction';
 
 const Orders = props => {
   const orders = useSelector(state => state.order.orders);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(orderActions.fetchOrderAction());
+  }, [dispatch]);
+
   console.log('orders', orders);
   useLayoutEffect(() => {
     props.navigation.setOptions({
