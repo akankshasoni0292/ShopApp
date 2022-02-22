@@ -5,14 +5,17 @@ import {useDispatch, useSelector} from 'react-redux';
 import OrderItem from '../../components/shop/OrderItem';
 import Color from '../../constants/Color';
 import * as orderActions from '../../store/actions/OrderAction';
+import * as loaderActions from '../../store/actions/LoaderAction';
+import SubText from '../../components/shop/SubText';
 
 const Orders = props => {
   const orders = useSelector(state => state.order.orders);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(loaderActions.showOrHideLoaderAction(true));
     dispatch(orderActions.fetchOrderAction());
-  }, [dispatch]);
+  });
 
   console.log('orders', orders);
   useLayoutEffect(() => {
@@ -29,22 +32,30 @@ const Orders = props => {
       ),
     });
   });
-  return (
-    <View style={styles.container}>
-      <FlatList
-        contentContainerStyle={styles.list}
-        data={orders}
-        renderItem={itemData => (
-          <OrderItem
-            orderId={itemData.item.id}
-            amount={itemData.item.totalAmount}
-            orderDate={itemData.item.orderDate}
-            items={itemData.item.items}
-          />
-        )}
-      />
-    </View>
-  );
+  if (orders.length === 0) {
+    return (
+      <View style={styles.emptyList}>
+        <SubText>No orders placed. Start shopping!</SubText>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <FlatList
+          contentContainerStyle={styles.list}
+          data={orders}
+          renderItem={itemData => (
+            <OrderItem
+              orderId={itemData.item.id}
+              amount={itemData.item.totalAmount}
+              orderDate={itemData.item.orderDate}
+              items={itemData.item.items}
+            />
+          )}
+        />
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -57,6 +68,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     padding: 10,
+  },
+  emptyList: {
+    flex: 1,
+    width: '95%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
