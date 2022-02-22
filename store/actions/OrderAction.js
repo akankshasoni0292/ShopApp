@@ -1,5 +1,6 @@
 import moment from 'moment';
 import Order from '../../models/Order';
+import {HIDE_LOADER} from './LoaderAction';
 
 export const ADD_ORDER = 'ADD_ORDER';
 export const FETCH_ORDERS = 'FECTH_ORDERS';
@@ -56,9 +57,21 @@ export const fetchOrderAction = () => {
         );
       }
 
+      loadedOrders.sort(function (a, b) {
+        return (
+          moment(b.orderDate, 'MMM Do YYYY, h:mm a') -
+          moment(a.orderDate, 'MMM Do YYYY, h:mm a')
+        );
+      });
+
       dispatch({
         type: FETCH_ORDERS,
         fetchedOrders: loadedOrders,
+      });
+
+      dispatch({
+        type: HIDE_LOADER,
+        loading: false,
       });
     });
   };

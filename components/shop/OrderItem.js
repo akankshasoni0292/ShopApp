@@ -12,7 +12,7 @@ const OrderItem = props => {
       <View>
         <View style={styles.detail}>
           <HeaderText>{props.orderId}</HeaderText>
-          <SubText>${props.amount}</SubText>
+          <SubText>${props.amount.toFixed(2)}</SubText>
         </View>
         <View style={styles.detail}>
           <View style={styles.order}>
@@ -33,7 +33,7 @@ const OrderItem = props => {
       {showDetails && (
         <View style={styles.cart}>
           {props.items.map(item => (
-            <CartItem key={item.productId} product={item} />
+            <CartItem key={item.id} product={item} />
           ))}
         </View>
       )}

@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, FlatList, ActivityIndicator} from 'react-native';
+import React from 'react';
+import {StyleSheet, View, FlatList} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import CartItem from '../../components/shop/CartItem';
 import CustomButton from '../../components/shop/CustomButton';
 import HeaderText from '../../components/shop/HeaderText';
 import SubText from '../../components/shop/SubText';
 import * as orderActions from '../../store/actions/OrderAction';
-import Color from '../../constants/Color';
 
 const CartList = props => {
   const carts = useSelector(state => state.cart.cartItems);

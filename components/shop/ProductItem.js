@@ -22,7 +22,7 @@ const ProductItem = props => {
               <Text style={styles.details} numberOfLines={0}>
                 {props.title}
               </Text>
-              <Text style={styles.details}>${props.price} </Text>
+              <Text style={styles.details}>${props.price.toFixed(2)} </Text>
             </View>
             <View style={styles.buttonContainer}>
               <CustomButton title="Add to Cart" onPress={props.addToCart} />

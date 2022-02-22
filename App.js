@@ -11,6 +11,8 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {addOrRemoveCartReducer} from './store/reducers/CartReducer';
 import {orderReducer} from './store/reducers/OrderReducer';
 import ReduxThunk from 'redux-thunk';
+import Loader from './components/shop/Loader';
+import {loaderReducer} from './store/reducers/LoaderReducer';
 
 enableScreens();
 
@@ -18,6 +20,7 @@ const rootReducer = combineReducers({
   products: productReducer,
   cart: addOrRemoveCartReducer,
   order: orderReducer,
+  loader: loaderReducer,
 });
 
 const storeEnhancer = compose(
@@ -34,6 +37,7 @@ const App = () => {
         <NavigationContainer>
           <ShopNavigator />
         </NavigationContainer>
+        <Loader />
       </SafeAreaProvider>
     </Provider>
   );
