@@ -10,12 +10,13 @@ import SubText from '../../components/shop/SubText';
 
 const Orders = props => {
   const orders = useSelector(state => state.order.orders);
+  const isLoading = useSelector(state => state.loader.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loaderActions.showOrHideLoaderAction(true));
     dispatch(orderActions.fetchOrderAction());
-  });
+  }, [dispatch]);
 
   console.log('orders', orders);
   useLayoutEffect(() => {
@@ -32,10 +33,14 @@ const Orders = props => {
       ),
     });
   });
+  const emptyListInfo =
+    !isLoading && orders.length === 0
+      ? 'No orders placed. Start shopping!'
+      : '';
   if (orders.length === 0) {
     return (
       <View style={styles.emptyList}>
-        <SubText>No orders placed. Start shopping!</SubText>
+        <SubText>{emptyListInfo}</SubText>
       </View>
     );
   } else {

@@ -18,16 +18,9 @@ export const orderReducer = (state = initialState, actions) => {
         actions.orderData.orderDate.format('MMM Do YYYY, h:mm a'),
       );
       console.log('New Order:', newOrder);
-      const existingOrders = state.orders;
-      if (existingOrders.length === 0) {
-        existingOrders.concat(newOrder);
-      } else {
-        existingOrders.unshift(newOrder);
-      }
-      console.log('Existing Orders', existingOrders);
       return {
         ...state,
-        orders: existingOrders,
+        orders: [newOrder, ...state.orders],
       };
     case FETCH_ORDERS:
       console.log('Fetched Orders: ', actions.fetchedOrders);
