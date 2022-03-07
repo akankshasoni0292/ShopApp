@@ -13,6 +13,15 @@ import {orderReducer} from './store/reducers/OrderReducer';
 import ReduxThunk from 'redux-thunk';
 import Loader from './components/shop/Loader';
 import {loaderReducer} from './store/reducers/LoaderReducer';
+import {exceptionReducer} from './store/reducers/ExceptionReducer';
+import {Alert} from 'react-native';
+import ErrorModal from './components/shop/ErrorModal';
+import RNRestart from 'react-native-restart';
+import * as exceptionActions from './store/actions/ExceptionAction';
+import {
+  setJSExceptionHandler,
+  setNativeExceptionHandler,
+} from 'react-native-exception-handler';
 
 enableScreens();
 
@@ -21,6 +30,7 @@ const rootReducer = combineReducers({
   cart: addOrRemoveCartReducer,
   order: orderReducer,
   loader: loaderReducer,
+  exception: exceptionReducer,
 });
 
 const storeEnhancer = compose(
@@ -30,6 +40,46 @@ const storeEnhancer = compose(
 
 const store = createStore(rootReducer, storeEnhancer);
 
+const jsExceptionHandler = (error, isFatal) => {
+  if (error.message != null) {
+    Alert.alert(
+      error.name,
+      '\n' + error.message + '\n' + error.componentStack,
+      [
+        {
+          text: 'Restart',
+          onPress: () => {
+            RNRestart.Restart();
+          },
+        },
+      ],
+    );
+    //store.dispatch(exceptionActions.showOrHideErrorAction(error));
+  }
+};
+
+setJSExceptionHandler(jsExceptionHandler, true);
+
+const nativeExceptionHandler = error => {
+  if (error.message != null) {
+    Alert.alert(
+      error.name,
+      '\n' + error.message + '\n' + error.componentStack,
+      [
+        {
+          text: 'Restart',
+          onPress: () => {
+            RNRestart.Restart();
+          },
+        },
+      ],
+    );
+    //store.dispatch(exceptionActions.showOrHideErrorAction(error));
+  }
+};
+
+setNativeExceptionHandler(nativeExceptionHandler, false, false);
+
 const App = () => {
   return (
     <Provider store={store}>
@@ -38,6 +88,7 @@ const App = () => {
           <ShopNavigator />
         </NavigationContainer>
         <Loader />
+        <ErrorModal />
       </SafeAreaProvider>
     </Provider>
   );

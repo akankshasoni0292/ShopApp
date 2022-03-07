@@ -12,6 +12,8 @@ target 'ShopApp' do
     :hermes_enabled => false
   )
 
+  pod 'ReactNativeExceptionHandler', :path => '../node_modules/react-native-exception-handler'
+
   target 'ShopAppTests' do
     inherit! :complete
     # Pods for testing

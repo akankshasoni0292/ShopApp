@@ -29,6 +29,7 @@ const ProductDetails = props => {
             resizeMode="stretch"
           />
         </View>
+        {errorMethod()}
         <View style={styles.cartContainer}>
           <View style={styles.priceContainer}>
             <HeaderText>Price:</HeaderText>
